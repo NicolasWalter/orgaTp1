@@ -5,7 +5,7 @@ void crearTablas(tdt* tabla, uint8_t* clave, uint8_t* valor){
 	tdtN1* nueva1= calloc(1,sizeof(tdtN1));
 	 tdtN2* nueva2= calloc(1,sizeof(tdtN2));
 	 tdtN3* nueva3= calloc(1,sizeof(tdtN3));
-printf("tabla de mierda %p\n", nueva3);
+
 tabla->primera=nueva1;
 tdtN1* prim= tabla->primera;
 

@@ -23,7 +23,8 @@
   %define TDT_OFFSET_PRIMERA          8
   %define TDT_OFFSET_CANTIDAD        16
   %define TDT_SIZE                   20
-  %define NULL 0
+  %define NULL                        0
+  
 section .text
 
 ; =====================================
@@ -102,8 +103,34 @@ tdt_borrarBloques:
         
 ; =====================================
 ; void tdt_traducir(tdt* tabla, uint8_t* clave, uint8_t* valor)
+;                         rdi             rsi        rdx
 tdt_traducir:
-        
+  push rbp
+  mov rbp, rsp
+  
+
+  mov rcx , [rsi] ; pongo clave[0]
+  cmp qword [rdi+TDT_OFFSET_PRIMERA+rcx*8], 0 ;multiplico por 8 para moverme de a bytes?
+  je .fin_traducir  
+  lea r8, [rdi+TDT_OFFSET_PRIMERA+rcx*8]  ;pongo en r8 el valor de prim->entradas[clave[0]]
+  inc rsi
+  cmp qword [r8+rsi*8], 0  ;
+  je .fin_traducir
+ 
+  lea r9, [r8+rsi*8] ; en r9 el valor de prim->entradas[clave[0]]->entradas[clave[1]]
+   inc rsi
+  cmp qword [r9+rsi*8], 0
+  je .fin_traducir
+  mov rdx, [r9+rsi*8]
+
+
+
+
+
+  .fin_traducir:
+  
+  pop rbp
+  ret
 ; =====================================
 ; void tdt_traducirBloque(tdt* tabla, bloque* b)
 tdt_traducirBloque:
