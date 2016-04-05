@@ -107,28 +107,39 @@ tdt_borrarBloques:
 tdt_traducir:
   push rbp
   mov rbp, rsp
+  push r12
+  push r13
   
 
   mov rcx , [rsi] ; pongo clave[0]
-  cmp qword [rdi+TDT_OFFSET_PRIMERA+rcx*8], 0 ;multiplico por 8 para moverme de a bytes?
+  imul rcx,8
+  cmp qword [rdi+TDT_OFFSET_PRIMERA+rcx], 0 ;multiplico por 8 para moverme de a bytes?
   je .fin_traducir  
-  lea r8, [rdi+TDT_OFFSET_PRIMERA+rcx*8]  ;pongo en r8 el valor de prim->entradas[clave[0]]
+
+  lea r8, [rdi+TDT_OFFSET_PRIMERA+rcx]  ;pongo en r8 el valor de prim->entradas[clave[0]]
   inc rsi
-  cmp qword [r8+rsi*8], 0  ;
+  mov r12,rsi
+  mov r13, [r12]
+  imul r13,8 
+  cmp qword [r8+r13], 0  ;
   je .fin_traducir
  
-  lea r9, [r8+rsi*8] ; en r9 el valor de prim->entradas[clave[0]]->entradas[clave[1]]
+  lea r9, [r8+r13] ; en r9 el valor de prim->entradas[clave[0]]->entradas[clave[1]]
    inc rsi
-  cmp qword [r9+rsi*8], 0
+   mov r12, rsi
+  mov r13, [r12]
+  imul r13,8 
+  cmp qword [r9+r13], 0
   je .fin_traducir
-  mov rdx, [r9+rsi*8]
+  mov rdx, [r9+r13]
 
 
 
 
 
   .fin_traducir:
-  
+  pop r13
+  pop r12
   pop rbp
   ret
 ; =====================================
