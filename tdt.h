@@ -56,10 +56,10 @@ void tdt_recrear(tdt** tabla, char* identificacion);
 
 uint32_t tdt_cantidad(tdt* tabla);
 
-void tdt_agregar(tdt* tabla, uint8_t* clave, uint8_t* valorete);
-void crearTablas(tdt* tabla, uint8_t* clave, uint8_t* valorete);
-void crear23(tdt* tabla, uint8_t* clave, uint8_t* valorete);
-void crear3(tdt* tabla, uint8_t* clave, uint8_t* valorete);
+void tdt_agregar(tdt* tabla, uint8_t* clave, uint8_t* valor);
+void crearTablas(tdt* tabla, uint8_t* clave, uint8_t* valor);
+void crear23(tdt* tabla, uint8_t* clave, uint8_t* valor);
+void crear3(tdt* tabla, uint8_t* clave, uint8_t* valor);
 
 void tdt_agregarBloque(tdt* tabla, bloque* b);
 void tdt_agregarBloques(tdt* tabla, bloque** b);

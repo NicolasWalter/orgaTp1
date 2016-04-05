@@ -9,11 +9,19 @@ int main (void){
 // CREO QUE NO TENGO QUE PEDIR MEMORIA PARA LOS VALORES !!!!!!!!!
      tdt * tabla = tdt_crear("meto vacia");
      uint8_t clave[3]= {0,1,2};
-     uint8_t valor1[15]={0,5,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    
+     uint8_t valor1[15]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
      tdt_agregar(tabla,clave,valor1);
-     printf("%i\n", tabla->primera->entradas[0]->entradas[1]->entradas[2].valor.val[1]);
+     for(int i=0; i<15; i++){
+      //  printf("%i\n", tabla->primera->entradas[0]->entradas[1]->entradas[2].valor.val[i]);
+    }
+    // printf("%i\n", tabla->primera->entradas[0]->entradas[1]->entradas[2].valor.val[1]);
      tdt_borrar(tabla,clave);
+   //  printf("%p\n", tabla->primera);
+     for (int i = 0; i < 256; ++i)
+     {
+        //printf("%p\n", tabla->primera->entradas[0]->entradas[1]->entradas[i]);
+     }
+     
      //printf("%p\n", (void*)tabla->primera);
  //printf("%p\n", (void*) tabla->primera);
 
@@ -55,9 +63,7 @@ int main (void){
 //         printf("%s,%i,%p, %i \n", id, cant, (void *)prim, a );
 
 
-    for(int i=0; i<256; i++){
-        printf("%i\n", tabla->primera->entradas[0]->entradas[1]->entradas[2].valor.val[1]);
-    }
+    
     // tdtN1* primero= tabla->primera;
     // uint32_t canti= tabla->cantidad;
     // uint8_t b=primero->entradas[clave2[0]]->entradas[clave2[1]]->entradas[clave2[2]].valor.val[1];
