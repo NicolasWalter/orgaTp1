@@ -4,6 +4,7 @@
   extern strcpy
   extern tdt_agregar
   extern tdt_borrar
+
   
 ; FUNCIONES
   global tdt_crear
@@ -113,10 +114,9 @@ tdt_borrarBloques:
 tdt_traducir:
   push rbp
   mov rbp, rsp
-  push r12
-  push r13
   push r14
   push r15
+  sub rsp, 8 
 
   xor rcx, rcx
   mov cl , [rsi+CLA_OFFSET_0] ; pongo clave[0] MODIFICAR TAMAÑO TIENE QUE SER 1 BYTE
@@ -140,18 +140,28 @@ tdt_traducir:
   mov cl, [rsi+CLA_OFFSET_2]
 
 add rcx, rcx
-  lea r14, [r14+rcx*8]
+  lea r14, [r14+rcx*8]	; tengo la pos de memoria del valor
   ;cmp byte [r14+15], NULL
   ;je .fin_traducir
-  mov r14,[r14]
-  mov [rdx], r14
+xor r13,r13
+xor r15,r15
+mov r15, rdx
+mov r13, r14
 
+
+.ciclo:
+ cmp qword rcx, 15
+je .fin_traducir
+  ;mov dl, [r15+rcx]
+ mov r14b, [r13+rcx]
+	mov dl, r14b
+  add rcx,1 
+   jmp .ciclo
 
   .fin_traducir:
+  add rsp,8
   pop r15
   pop r14
-  pop r13
-  pop r12
   pop rbp
   ret
 
