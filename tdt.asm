@@ -24,7 +24,10 @@
   %define TDT_OFFSET_CANTIDAD        16
   %define TDT_SIZE                   20
   %define NULL                        0
-  
+  %define CLA_OFFSET_0                0
+  %define CLA_OFFSET_1                1
+  %define CLA_OFFSET_2                2
+
 section .text
 
 ; =====================================
@@ -36,14 +39,17 @@ push rbx
 sub rsp,8
 
 mov rbx, rdi ; pongo en rbx ID para preservar
+xor rax, rax
 
 .ciclo:
 cmp byte [rdi], 0
 je .sigo
-add rdi, 1
+inc rdi
+inc rax
 jmp .ciclo
 
 .sigo:
+mov rdi, rax
 call malloc
 cmp rax,0
 je .fin_crear
@@ -109,39 +115,53 @@ tdt_traducir:
   mov rbp, rsp
   push r12
   push r13
-  
+  push r14
+  push r15
 
-  mov rcx , [rsi] ; pongo clave[0]
-  imul rcx,8
-  cmp qword [rdi+TDT_OFFSET_PRIMERA+rcx], 0 ;multiplico por 8 para moverme de a bytes?
-  je .fin_traducir  
-
-  lea r8, [rdi+TDT_OFFSET_PRIMERA+rcx]  ;pongo en r8 el valor de prim->entradas[clave[0]]
-  inc rsi
-  mov r12,rsi
-  mov r13, [r12]
-  imul r13,8 
-  cmp qword [r8+r13], 0  ;
+  xor rcx, rcx
+  mov cl , [rsi+CLA_OFFSET_0] ; pongo clave[0] MODIFICAR TAMAÑO TIENE QUE SER 1 BYTE
+  mov rdi, [rdi+TDT_OFFSET_PRIMERA]
+  mov r14, rdi ;estoy en tabla->primera
+  cmp r14, NULL
   je .fin_traducir
- 
-  lea r9, [r8+r13] ; en r9 el valor de prim->entradas[clave[0]]->entradas[clave[1]]
-   inc rsi
-   mov r12, rsi
-  mov r13, [r12]
-  imul r13,8 
-  cmp qword [r9+r13], 0
+
+  mov r14, [r14+rcx*8]; me muevo a tabla->primera->entradas[clave[0]]
+  cmp r14, NULL
   je .fin_traducir
-  mov rdx, [r9+r13]
 
+  xor rcx, rcx
+  mov cl, [rsi+CLA_OFFSET_1] ; clave[1]
 
+  mov r14, [r14+rcx*8] ; tabla->prim->ent[cla[0]]->ent[cla[1]]
+  cmp r14, NULL
+  je .fin_traducir
 
+  xor rcx, rcx
+  mov cl, [rsi+CLA_OFFSET_2]
+
+add rcx, rcx
+  lea r14, [r14+rcx*8]
+  ;cmp byte [r14+15], NULL
+  ;je .fin_traducir
+  mov r14,[r14]
+  mov [rdx], r14
 
 
   .fin_traducir:
+  pop r15
+  pop r14
   pop r13
   pop r12
   pop rbp
   ret
+
+
+
+
+
+
+
+
 ; =====================================
 ; void tdt_traducirBloque(tdt* tabla, bloque* b)
 tdt_traducirBloque:

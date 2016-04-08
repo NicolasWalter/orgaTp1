@@ -135,7 +135,11 @@ tdtN1* tabla1= tabla->primera;
 
 				if(todosnull){ 
 					free(tabla->primera);
-				}	
+				}else{
+					tabla->primera=0;
+				}
+		}else{
+			tabla->primera->entradas[clave[0]]=0;
 		}
 	}else{
 		tabla3->entradas[clave[2]].valido=0;
