@@ -146,15 +146,17 @@ add rcx, rcx
 xor r13,r13
 xor r15,r15
 mov r15, rdx
+;xor rdx, rdx
+
 mov r13, r14
 
 
 .ciclo:
  cmp qword rcx, 15
 je .fin_traducir
-  ;mov dl, [r15+rcx]
  mov r14b, [r13+rcx]
-	mov dl, r14b
+mov byte [rdx+rcx] , r14b
+mov dl, [r15+rcx]
   add rcx,1 
    jmp .ciclo
 
@@ -165,7 +167,16 @@ je .fin_traducir
   pop rbp
   ret
 
-
+; string_copiar_loop:
+;     mov bl, [r12 + rcx]        ; bl <- *(s+i) = s[i]
+;     cmp bl, 0                  ; if s[i] == '\0': return
+;     je string_copiar_fin
+;     mov byte [rax + rcx], bl   ; *(p+i) <- s[i] ~ p[i] <- s[i] 
+;     inc rcx                    ; i++
+;     jmp string_copiar_loop
+;   string_copiar_fin:
+;     mov byte [rax + rcx], bl   ; *(p+i) <- s[i] = '\0'
+    
 
 
 
