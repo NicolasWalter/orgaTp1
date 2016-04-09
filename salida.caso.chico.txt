@@ -1,0 +1,2 @@
+>>> Test : operaciones sobre tabla vacia
+0

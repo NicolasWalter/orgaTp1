@@ -11,41 +11,15 @@ int main (void){
      uint8_t clave[3]= {1,2,3};
      uint8_t valor[15]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
      tdt_agregar(tabla,clave,valor);
-     printf("primera es %p\n", tabla->primera );
-     printf("segunda es %p\n", tabla->primera->entradas[clave[0]]);
-     printf("tercera es %p\n", tabla->primera->entradas[clave[0]]->entradas[clave[1]]);
-     printf("dir valor es %p\n", &(tabla->primera->entradas[clave[0]]->entradas[clave[1]]->entradas[clave[2]]));
-     for (int i = 0; i < 15; ++i)
-     {
-          /* code */     printf("valor es %p\n", (tabla->primera->entradas[clave[0]]->entradas[clave[1]]->entradas[clave[2]]).valor.val[i]);
+     uint8_t clave2[3]= {160,230,240};
+     uint8_t valor2[15]={190,222,232,214,215,156,77,98,129,210,211,112,123,194,185};
+     tdt_agregar(tabla,clave2,valor2);
 
-     }
-
-
-     for (int i = 0; i < 15; ++i)
-     {
-          printf("el valor es%p\n", valor[i]);
-     }
-
-     uint8_t a[15]={5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
-     // for (int i = 0; i < 15; ++i)
-     // {
-     //    valor[i]=a[i];
-     // }
-
-          tdt_traducir(tabla,clave,a);
-          
-     for (int i = 0; i < 15; ++i)
-     {
-          printf("el valor nuevo es%p\n", a[i]);
-     }
-    
- //     tdt_traducir(tabla,clave,valor);
- // for (int i = 0; i < 15; ++i)
- //     {
- //          printf("el valor es%p\n", valor[i]);
- //     }
+char *caca= "hola.txt";
+FILE *pFile = fopen( caca, "w" );
+tdt_imprimirTraducciones(tabla,pFile);
     //tdt_destruir(&(tabla));
+
     
     return 0;    
 }

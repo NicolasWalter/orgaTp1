@@ -114,57 +114,52 @@ tdt_borrarBloques:
 tdt_traducir:
   push rbp
   mov rbp, rsp
-  push r14
-  push r15
-  sub rsp, 8 
 
   xor rcx, rcx
   mov cl , [rsi+CLA_OFFSET_0] ; pongo clave[0] MODIFICAR TAMAÑO TIENE QUE SER 1 BYTE
   mov rdi, [rdi+TDT_OFFSET_PRIMERA]
-  mov r14, rdi ;estoy en tabla->primera
-  cmp r14, NULL
+  mov r10, rdi ;estoy en tabla->primera
+  cmp r10, NULL
   je .fin_traducir
 
-  mov r14, [r14+rcx*8]; me muevo a tabla->primera->entradas[clave[0]]
-  cmp r14, NULL
+  mov r10, [r10+rcx*8]; me muevo a tabla->primera->entradas[clave[0]]
+  cmp r10, NULL
   je .fin_traducir
 
   xor rcx, rcx
   mov cl, [rsi+CLA_OFFSET_1] ; clave[1]
 
-  mov r14, [r14+rcx*8] ; tabla->prim->ent[cla[0]]->ent[cla[1]]
-  cmp r14, NULL
+  mov r10, [r10+rcx*8] ; tabla->prim->ent[cla[0]]->ent[cla[1]]
+  cmp r10, NULL
   je .fin_traducir
 
   xor rcx, rcx
   mov cl, [rsi+CLA_OFFSET_2]
 
 add rcx, rcx
-  lea r14, [r14+rcx*8]	; tengo la pos de memoria del valor
-  ;cmp byte [r14+15], NULL
+  lea r10, [r10+rcx*8]	; tengo la pos de memoria del valor
+  ;cmp byte [r10+15], NULL
   ;je .fin_traducir
-xor r13,r13
-xor r15,r15
-mov r15, rdx
+xor r8,r8
+xor r9,r9
+mov r9, rdx
 ;xor rdx, rdx
 
 
-mov r13, r14
-xor r14,r14
+mov r8, r10
+xor r10,r10
 xor rcx, rcx
 .ciclo:
  cmp qword rcx, 15
 je .fin_traducir
- mov r14b, [r13+rcx]
-mov byte [rdx+rcx] , r14b
-;mov dl, [r15+rcx]
+ mov r10b, [r8+rcx]
+mov byte [rdx+rcx] , r10b
+;mov dl, [r9+rcx]
   add rcx, 1 
    jmp .ciclo
 
   .fin_traducir:
-  add rsp,8
-  pop r15
-  pop r14
+ 
   pop rbp
   ret
 

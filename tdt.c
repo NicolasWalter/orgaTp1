@@ -1,5 +1,24 @@
 #include "tdt.h"
+#define TAB_1  tabla->primera
+#define TAB_2  TAB_1->entradas
+#define TAB_3  TAB_2->entradas
+#define VAL_  TAB_3->entradas
 
+int definido(tdt* tabla, uint8_t cero, uint8_t uno, uint8_t dos){
+	// tdtN1* pri= tabla->primera;
+	// tdtN2* sec= pri->entradas[cero];
+	// tdtN3* ter = sec->entradas[uno];
+	// uint8_t va= ter->entradas[dos].valido;
+	 uint8_t cero8= 0;
+
+	if(tabla->primera==0 || tabla->primera->entradas[cero]==0 || tabla->primera->entradas[cero]->entradas[uno]==0 || 
+		tabla->primera->entradas[cero]->entradas[uno]->entradas[dos].valido ==cero8){
+		return 0;
+	} else{
+		return 1;
+	}
+
+}
 
 void crearTablas(tdt* tabla, uint8_t* clave, uint8_t* valor){
 	tdtN1* nueva1= calloc(1,sizeof(tdtN1));
@@ -149,6 +168,39 @@ tdtN1* tabla1= tabla->primera;
 
 }
 void tdt_imprimirTraducciones(tdt* tabla, FILE *pFile) {
+
+
+//pFile= fopen("porfavor.txt", "w");
+
+char *id= tabla->identificacion;
+fprintf(pFile, "- %s %s\n",id,"-");
+
+for(int i=0; i<256; i++){
+	for(int j=0; j<256; j++){
+		for(int k=0; k<256; k++){
+			if(definido(tabla,i,j,k)){
+				uint8_t val[15];
+				uint8_t clave[3]={i,j,k};
+				tdt_traducir(tabla,clave,val);
+				fprintf(pFile, "%X%X%X%s",i,j,k," => ");
+				for(int l=0; l<15;++l){
+					if(l!=14){
+				fprintf(pFile,"%X",val[l]);
+					}else{
+						fprintf(pFile,"%X\n",val[l]);
+					}
+
+
+				}
+			}
+		}
+	}
+	
+}
+
+
+fclose(pFile);
+
 }
 
 maxmin* tdt_obtenerMaxMin(tdt* tabla) {
