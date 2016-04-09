@@ -148,16 +148,17 @@ xor r15,r15
 mov r15, rdx
 ;xor rdx, rdx
 
+
 mov r13, r14
-
-
+xor r14,r14
+xor rcx, rcx
 .ciclo:
  cmp qword rcx, 15
 je .fin_traducir
  mov r14b, [r13+rcx]
 mov byte [rdx+rcx] , r14b
-mov dl, [r15+rcx]
-  add rcx,1 
+;mov dl, [r15+rcx]
+  add rcx, 1 
    jmp .ciclo
 
   .fin_traducir:

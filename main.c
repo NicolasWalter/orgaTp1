@@ -15,7 +15,11 @@ int main (void){
      printf("segunda es %p\n", tabla->primera->entradas[clave[0]]);
      printf("tercera es %p\n", tabla->primera->entradas[clave[0]]->entradas[clave[1]]);
      printf("dir valor es %p\n", &(tabla->primera->entradas[clave[0]]->entradas[clave[1]]->entradas[clave[2]]));
-     printf("valor es %p\n", (tabla->primera->entradas[clave[0]]->entradas[clave[1]]->entradas[clave[2]]));
+     for (int i = 0; i < 15; ++i)
+     {
+          /* code */     printf("valor es %p\n", (tabla->primera->entradas[clave[0]]->entradas[clave[1]]->entradas[clave[2]]).valor.val[i]);
+
+     }
 
 
      for (int i = 0; i < 15; ++i)
