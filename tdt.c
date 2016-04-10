@@ -122,7 +122,7 @@ tabla->cantidad--;
 			i++;
 
 	}
-printf("todosnull es %i\n", todosnull);
+
 
 tdtN3* tabla3 =tabla->primera->entradas[clave[0]]->entradas[clave[1]];
 tdtN2* tabla2= tabla->primera->entradas[clave[0]];

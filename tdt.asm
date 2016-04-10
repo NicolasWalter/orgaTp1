@@ -119,23 +119,6 @@ pop rbx
 pop rbp
 ret
 
-; mov r15,rax
-;   mov rdi,r12
-;   call tdt_destruir
-;   mov [r12],r15
-
-; call tdt_destruir
-
-; mov rdi, r13  ; le cambio la ID
-; cmp qword rdi, NULL
-; jne .cambioID
-; mov rdi,rbx; si es null le deoj la id original
-
-; .cambioID:
-; call tdt_crear 
-; mov [r12], rax
-
-
 
 ; =====================================
 ; uint32_t tdt_cantidad(tdt* tabla)
@@ -146,20 +129,73 @@ ret
 
 ; =====================================
 ; void tdt_agregarBloque(tdt* tabla, bloque* b)
+;                             rdi   , rsi
 tdt_agregarBloque:
+lea rdx, [rsi+3]
+jmp tdt_agregar
+
 
 ; =====================================
 ; void tdt_agregarBloques(tdt* tabla, bloque** b)
 tdt_agregarBloques:
+push rbp
+mov rbp, rsp
+push r12
+push r13
+push r14
+sub rsp,8
+
+
+mov r13, rsi ; estoy en el primer bloque 
+xor r14, r14
+.ciclo:
+cmp qword [r13+r14*8], NULL
+je .fin_agregarBloques
+mov r12, [r13+r14*8] ; 
+inc r14  
+mov rsi, r12
+call tdt_agregarBloque
+jmp .ciclo
+.fin_agregarBloques:
+add rsp,8
+pop r14
+pop r13
+pop r12
+pop rbp
+ret
         
 ; =====================================
 ; void tdt_borrarBloque(tdt* tabla, bloque* b)
 tdt_borrarBloque:
-        
+      jmp tdt_borrar
 ; =====================================
 ; void tdt_borrarBloques(tdt* tabla, bloque** b)
 tdt_borrarBloques:
-        
+ push rbp
+mov rbp, rsp
+push r12
+push r13
+push r14
+sub rsp,8
+
+
+mov r13, rsi ; estoy en el primer bloque 
+xor r14, r14
+.ciclo:
+cmp qword [r13+r14*8], NULL
+je .fin_borrarBloques
+mov r12, [r13+r14*8] ; 
+inc r14  
+mov rsi, r12
+call tdt_borrarBloque
+jmp .ciclo
+.fin_borrarBloques:
+add rsp,8
+pop r14
+pop r13
+pop r12
+pop rbp
+ret
 ; =====================================
 ; void tdt_traducir(tdt* tabla, uint8_t* clave, uint8_t* valor)
 ;                         rdi             rsi        rdx
@@ -218,11 +254,37 @@ mov byte [rdx+rcx] , r10b
 ; =====================================
 ; void tdt_traducirBloque(tdt* tabla, bloque* b)
 tdt_traducirBloque:
+lea rdx, [rsi+3]
+jmp tdt_traducir
 
 ; =====================================
 ; void tdt_traducirBloques(tdt* tabla, bloque** b)
 tdt_traducirBloques:
-        
+ push rbp
+mov rbp, rsp
+push r12
+push r13
+push r14
+sub rsp,8
+
+
+mov r13, rsi ; estoy en el primer bloque 
+xor r14, r14
+.ciclo:
+cmp qword [r13+r14*8], NULL
+je .fin_traducirBloques
+mov r12, [r13+r14*8] ; 
+inc r14  
+mov rsi, r12
+call tdt_traducirBloque
+jmp .ciclo
+.fin_traducirBloques:
+add rsp,8
+pop r14
+pop r13
+pop r12
+pop rbp
+ret
 ; =====================================
 ; void tdt_destruir(tdt** tabla)
 ;                       rdi
@@ -249,20 +311,20 @@ cmp qword r12, NULL
 je .libera 
 
 .ciclo: 
-cmp r14b, 255
+cmp qword r14, 256
 je .libera
 
 mov r13, [r12+r14*8] ; recorro toda la primer tabla
-inc r14b
+inc r14
 cmp r13, NULL
 je .ciclo
 
 .ciclo2: 
-cmp r15b, 255
+cmp qword r15, 256
 je .libera2
 
 mov r11, [r13+r15*8] ; recorro la segunda
-inc r15b
+inc r15
 cmp r11, NULL
 je .ciclo2
 
@@ -273,6 +335,7 @@ je .ciclo2
 .libera2:
 mov rdi, r13
 call free   ; borro la tabla 2
+xor r15, r15
 jmp .ciclo
 
 
@@ -289,8 +352,6 @@ call free
 mov rdi, rbx
 call free
 
-
-
 ; mov rdi, [rbx+TDT_OFFSET_IDENTIFICACION]
 ; mov rdi, [rdi]
 ; call free 
@@ -306,6 +367,107 @@ pop r12
 pop rbp
 ret
 
+; void tdt_destruir(tdt** tabla)
+;                       rdi
+; tdt_destruir:
+; push rbp
+; mov rbp, rsp
+; push rbx
+; push r12
+; push r13
+; push r14
+; push r15
+; sub rsp,8
+
+; mov rbx, rdi ; preservo rdi
+; xor r11, r11 ;puntero a la tercera 
+; mov r13, [rdi] ;tdt* tabla
+; mov r13, [r13+TDT_OFFSET_PRIMERA] ;Tabla primera
+; xor r12,r12 ;puntero a la segunda
+; xor r14,r14 ; contador segunda
+; xor r15,r15  ; contador primera
 
 
+; cmp r13, NULL
+; je .fin_destruir
 
+; .ciclo: 
+; cmp qword r15, 256
+; je .libera
+; mov r12, [r13+r15*8]
+; inc r15
+; cmp qword r12, NULL
+; je .ciclo
+
+; .ciclo2:
+; cmp qword r14, 256
+; je .libera2
+; mov r11, [r12+r15*8]
+; inc r14
+; cmp qword r11, NULL
+; je .ciclo2
+; mov rdi, r11
+; call free
+; jmp .ciclo2 
+
+
+; .libera2:
+; mov rdi, r12
+; call free
+; xor r14,r14
+; jmp .ciclo
+
+; .libera:
+; mov rdi, r13
+; call free
+; xor r15,r15
+; jmp .fin_destruir
+; ; ; if(tabla->primera!=NULL){ listo
+; ; ;   aux =tabla->primera
+; ; ;   for(int i=0 ;i<256; i++){
+; ; ;       if(aux->entradas[i]!=NULL){
+; ; ;         for(int j=0, j<256, i++){
+; ; ;           if( aux->entradas[i]->entradas[j]!=NULL){
+; ; ;           free(aux->entradas[i]->entradas[j])
+; ; ;           }
+; ; ;           free(aux->entradas[i])
+; ; ;         }
+; ; ;       }
+; ; ;     }
+; ; ; }
+
+; .fin_destruir:
+; mov rbx, [rbx]
+; mov rdi, [rbx+TDT_OFFSET_IDENTIFICACION]
+; call free
+; mov rdi, rbx
+; call free
+
+; add rsp,8
+; pop r15
+; pop r14
+; pop r13
+; pop r12
+; pop rbx
+; pop rbp
+; ret
+
+; cmp qword r13, NULL ; if(tabla->primera!=NULL)
+; jne .primera
+; jmp .fin_destruir
+
+; .primera: 
+; cmp qword r15, 256        ;for(int i=0 ;i<256; i++)
+; jne .sigo
+; mov rdi ,r13
+; call free
+; .sigo:
+; cmp qword [r13+r15*8], NULL ;if(aux->entradas[i]!=NULL)
+; jne .segunda 
+; inc r15
+; jmp .primera
+; .segunda:
+; mov r12, [r13+r15*8]
+; inc r15
+; cmp qword r14, 256  ; for(int j=0, j<256, i++)
+; jne .tercera
