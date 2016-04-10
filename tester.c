@@ -6,7 +6,7 @@
 char *archivoCasoChico  =  "salida.caso.chico.txt";
 char *archivoCasoGrande =  "salida.caso.grande.txt";
 void casoC();
-void casoG();
+//void casoG();
 
 uint8_t clave1[3] = {1,2,3};
 uint8_t valor1[15] = {3,4,5,6,7,8,4,5,63,2,3,4,5,6,5};
@@ -79,7 +79,7 @@ void casoC(){
     
     fputs( ">>> Test : operaciones sobre tabla vacia\n", pFile );
     fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     tdt_imprimirTraducciones(tabla, pFile);
     tdt_borrar(tabla,clave1);
     tdt_borrar(tabla,clave2);
@@ -117,23 +117,23 @@ void casoC(){
     fputs( ">>> Test : operaciones sobre tabla no vacia\n", pFile );
     
     tdt_imprimirTraducciones(tabla, pFile);
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     tdt_agregar(tabla, clave1, valor1);
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     tdt_agregar(tabla, clave2, valor2);
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     tdt_agregar(tabla, clave3, valor3);
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     tdt_imprimirTraducciones(tabla, pFile);
     tdt_agregar(tabla, clave4, valor4);
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     tdt_agregar(tabla, clave5, valor5);
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
     tdt_agregar(tabla, clave6, valor6);
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     tdt_agregar(tabla, clave7, valor7);   
-    printmaxmin(pFile, tabla);
+    //printmaxmin(pFile, tabla);
     tdt_imprimirTraducciones(tabla, pFile);
     tdt_agregarBloque(tabla,&b1);
     tdt_agregarBloque(tabla,&b1);
@@ -225,7 +225,7 @@ void casoG() {
         tdt_borrar(tabla,bb[rand()%n]->clave);
       }
       tdt_imprimirTraducciones(tabla, pFile);
-      printmaxmin(pFile, tabla);
+      //printmaxmin(pFile, tabla);
       fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
       fprintf(pFile,"\n");
       
@@ -239,19 +239,19 @@ void casoG() {
         tdt_borrar(tabla,bb[rand()%n]->clave);
       }
       tdt_imprimirTraducciones(tabla, pFile);
-      printmaxmin(pFile, tabla);
+      //printmaxmin(pFile, tabla);
       fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
       fprintf(pFile,"\n");
       
       fputs( ">>> Test : maximos y minimos\n", pFile );
       tdt_agregar(tabla,clave1,valorMax);
-      printmaxmin(pFile, tabla);
+      //printmaxmin(pFile, tabla);
       tdt_agregar(tabla,clave2,valorMin);
-      printmaxmin(pFile, tabla);
+      //printmaxmin(pFile, tabla);
       tdt_agregar(tabla,claveMax,valor1);
-      printmaxmin(pFile, tabla);
+      //printmaxmin(pFile, tabla);
       tdt_agregar(tabla,claveMin,valor2);
-      printmaxmin(pFile, tabla);
+      //printmaxmin(pFile, tabla);
       fprintf(pFile,"\n");
       
       fputs( ">>> Test : traducir bloques\n", pFile );

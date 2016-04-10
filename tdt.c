@@ -111,6 +111,7 @@ if(tabla->primera==0){ //TODO VACIO
 
 
 void tdt_borrar(tdt* tabla, uint8_t* clave) {
+	printf("%s\n","entre loro" );
 if(definido(tabla, clave[0], clave[1], clave[2])){
 tabla->cantidad--;
 	int todosnull = 1;
@@ -129,7 +130,7 @@ tdtN2* tabla2= tabla->primera->entradas[clave[0]];
 tdtN1* tabla1= tabla->primera;
 	if(todosnull){  //la tabla 3 solo tenia un valor valido
 		free(tabla->primera->entradas[clave[0]]->entradas[clave[1]]);
-		printf("tabla3 es %p\n", (void*) tabla->primera->entradas[clave[0]]->entradas[clave[1]]);
+		
 
 		i=0;
 		while(i<256 && todosnull){ 
@@ -138,9 +139,7 @@ tdtN1* tabla1= tabla->primera;
 				}
 			i++;
 			}
-			printf("todosnull es %i\n", todosnull);
-
-		
+			
 		if(todosnull){ 
 			free(tabla->primera->entradas[clave[0]]);
 			i=0;
@@ -150,8 +149,7 @@ tdtN1* tabla1= tabla->primera;
 				}
 				i++;
 				}
-				printf("todosnull es %i\n", todosnull);
-
+				
 				if(todosnull){ 
 					free(tabla->primera);
 				}else{

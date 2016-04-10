@@ -3,10 +3,14 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+
 int main (void){
 
-tdt * tabla = tdt_crear("m");
-     uint8_t clave[3]= {1,2,3};
+     FILE *pFile;
+    tdt *tabla = tdt_crear("sa");
+    
+    pFile = fopen( "archivoCasoprueba", "a" );
+         uint8_t clave[3]= {1,2,3};
 uint8_t valor[15]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
 // char* hola= "te odio asm";
@@ -42,19 +46,38 @@ uint8_t valor[15]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     bloque* b[5] = {&b1,&b2,&b3,&b4,0};
 
 
-//tdt_agregarBloques(tabla,&b);   
-// uint8_t valor2[15]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+tdt_agregarBloques(tabla,&b);   
+uint8_t valor2[15]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
        // tdt_agregarBloque(tabla,&b1);
        //        tdt_agregarBloque(tabla,&b2);
        // tdt_agregarBloque(tabla,&b3);
        // tdt_agregarBloque(tabla,&b4);
 tdt_agregarBloques(tabla,&b);
        tdt_traducirBloques(tabla,&b);
-    tdt_borrarBloques(tabla,&b);
-     // for (int i = 0; i < 15; ++i)
-     // {
-     //     printf("%i\n", tabla->primera->entradas[clave2[0]]->entradas[clave2[1]]->entradas[clave2[2]].valor.val[i]);
-     // }
+      
+
+       tdt_imprimirTraducciones(tabla, pFile); 
+    //tdt_borrarBloques(tabla,&b);
+     for (int i = 0; i < 15; ++i)
+     {
+         printf("%i\n", tabla->primera->entradas[clave2[0]]->entradas[clave2[1]]->entradas[clave2[2]].valor.val[i]);
+     }
+     printf("%s\n", " ");
+      for (int i = 0; i < 15; ++i)
+     {
+         printf("%i\n", tabla->primera->entradas[clave3[0]]->entradas[clave3[1]]->entradas[clave3[2]].valor.val[i]);
+     }
+  printf("%s\n", " ");
+ for (int i = 0; i < 15; ++i)
+     {
+         printf("%i\n", tabla->primera->entradas[clave4[0]]->entradas[clave4[1]]->entradas[clave4[2]].valor.val[i]);
+     }
+  printf("%s\n", " ");
+ for (int i = 0; i < 15; ++i)
+     {
+         printf("%i\n", tabla->primera->entradas[clave5[0]]->entradas[clave5[1]]->entradas[clave5[2]].valor.val[i]);
+     }
+
     //  tdt_agregar(tabla, clave1, valor);
     //       tdt_agregar(tabla,clave2,valor);
 
@@ -68,7 +91,7 @@ tdt_agregarBloques(tabla,&b);
 
 // printf("LA ID ES %s\n", tabla->identificacion );
 
-tdt_destruir(&(tabla));
+//tdt_destruir(&(tabla));
 
 
     return 0;    

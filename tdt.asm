@@ -185,7 +185,7 @@ xor r14, r14
 cmp qword [r13+r14*8], NULL
 je .fin_borrarBloques
 mov r12, [r13+r14*8] ; 
-inc r14  
+inc r14 
 mov rsi, r12
 call tdt_borrarBloque
 jmp .ciclo

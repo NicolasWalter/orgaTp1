@@ -1,2 +1,3 @@
 >>> Test : operaciones sobre tabla vacia
 0
+- sa -
