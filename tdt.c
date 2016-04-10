@@ -111,7 +111,7 @@ if(tabla->primera==0){ //TODO VACIO
 
 
 void tdt_borrar(tdt* tabla, uint8_t* clave) {
-
+if(definido(tabla, clave[0], clave[1], clave[2])){
 tabla->cantidad--;
 	int todosnull = 1;
 	int i=0;
@@ -165,7 +165,7 @@ tdtN1* tabla1= tabla->primera;
 		tabla3=0;
 		tabla2=0;
 	}
-
+}
 }
 void tdt_imprimirTraducciones(tdt* tabla, FILE *pFile) {
 

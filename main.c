@@ -5,21 +5,41 @@
 
 int main (void){
 
-
-// CREO QUE NO TENGO QUE PEDIR MEMORIA PARA LOS VALORES !!!!!!!!!
-     tdt * tabla = tdt_crear("meto vacia");
+tdt * tabla = tdt_crear("m");
      uint8_t clave[3]= {1,2,3};
-     uint8_t valor[15]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-     tdt_agregar(tabla,clave,valor);
-     uint8_t clave2[3]= {160,230,240};
-     uint8_t valor2[15]={190,222,232,214,215,156,77,98,129,210,211,112,123,194,185};
-     tdt_agregar(tabla,clave2,valor2);
+uint8_t valor[15]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
-char *caca= "hola.txt";
-FILE *pFile = fopen( caca, "w" );
-tdt_imprimirTraducciones(tabla,pFile);
-    //tdt_destruir(&(tabla));
+char* hola= '\0';
+         tdt_recrear(&tabla, hola );
+     printf("%s\n", tabla->identificacion );
 
-    
+    //  tdt * tabla = tdt_crear("m");
+    //  uint8_t clave[3]= {1,2,3};
+    //  uint8_t valor[15]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+    //       uint8_t clave1[3]= {2,3,5};
+    //  uint8_t clave2[3]= {8,1,2};
+    //  uint8_t clave3[3]= {3,2,3};
+    //  uint8_t clave4[3]= {45,200,32};
+    //  uint8_t clave5[3]= {11,235,234};
+    //  uint8_t clave6[3]= {1,2,3};
+
+
+    //  tdt_agregar(tabla,clave,valor);
+    //  tdt_agregar(tabla, clave1, valor);
+    //       tdt_agregar(tabla,clave2,valor);
+
+    //  tdt_agregar(tabla,clave3,valor);
+
+    // tdt_agregar(tabla,clave4,valor);
+
+    //  tdt_agregar(tabla,clave5,valor);
+    //  tdt_agregar(tabla,clave6,valor);
+
+
+// printf("LA ID ES %s\n", tabla->identificacion );
+
+ //tdt_destruir(&(tabla));
+
+
     return 0;    
 }
