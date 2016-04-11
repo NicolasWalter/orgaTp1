@@ -56,7 +56,7 @@ tdt* tdt_crear(char* identificacion);
 void tdt_recrear(tdt** tabla, char* identificacion);
 
 uint32_t tdt_cantidad(tdt* tabla);
-int definido(tdt* tabla, uint8_t cero, uint8_t uno, uint8_t dos);
+int definido(tdt* tabla, int cero, int uno, int dos);
 
 
 void tdt_agregar(tdt* tabla, uint8_t* clave, uint8_t* valor);

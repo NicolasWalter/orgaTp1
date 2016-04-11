@@ -38,8 +38,8 @@ int main() {
   srand(70);
   remove(archivoCasoChico);
   casoC();
-  remove(archivoCasoGrande);
-  casoG();
+   remove(archivoCasoGrande);
+  // casoG();
   return 0;
 }
 
@@ -86,12 +86,12 @@ void casoC(){
     fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
     tdt_borrar(tabla,clave3);
     tdt_imprimirTraducciones(tabla, pFile);
-    tdt_borrarBloque(tabla,&b1);
+    //tdt_borrarBloque(tabla,&b1);
     fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
-    tdt_borrarBloque(tabla,&b2);
-    tdt_borrarBloque(tabla,&b3);
+    //tdt_borrarBloque(tabla,&b2);
+    //tdt_borrarBloque(tabla,&b3);
     tdt_imprimirTraducciones(tabla, pFile);
-    tdt_borrarBloques(tabla,(bloque**)&b);
+    //tdt_borrarBloques(tabla,(bloque**)&b);
     tdt_imprimirTraducciones(tabla, pFile);
     fprintf(pFile,"\n");
 
@@ -106,10 +106,10 @@ void casoC(){
     tdt_agregar(tabla, clave6, valor6);
     tdt_agregar(tabla, clave7, valor7);   
     tdt_imprimirTraducciones(tabla, pFile);
-    tdt_borrar(tabla,clave2);
-    tdt_borrar(tabla,clave3);
-    tdt_borrar(tabla,clave4);
-    tdt_borrar(tabla,clave5);
+    // tdt_borrar(tabla,clave2);
+    // tdt_borrar(tabla,clave3);
+    // tdt_borrar(tabla,clave4);
+    // tdt_borrar(tabla,clave5);
     tdt_imprimirTraducciones(tabla, pFile);
     fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
     fprintf(pFile,"\n");
@@ -139,23 +139,23 @@ void casoC(){
     tdt_agregarBloque(tabla,&b1);
     tdt_agregarBloque(tabla,&b1);
     fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
-    tdt_imprimirTraducciones(tabla, pFile);
-    tdt_agregarBloques(tabla,(bloque**)&b);
-    tdt_agregarBloques(tabla,(bloque**)&b);
-    tdt_agregarBloques(tabla,(bloque**)&b);
-    tdt_imprimirTraducciones(tabla, pFile);
-    tdt_borrar(tabla,clave1);
-    tdt_borrar(tabla,clave2);
-    tdt_borrar(tabla,clave2);
-    tdt_borrar(tabla,clave3);
-    tdt_borrar(tabla,clave7);
-    tdt_borrarBloques(tabla,(bloque**)&b);
-    tdt_imprimirTraducciones(tabla, pFile);
-    fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
-    tdt_recrear(&tabla,"saaaaaaaaaaaaaaaaaa");
-    tdt_agregarBloques(tabla,(bloque**)&b);
-    tdt_imprimirTraducciones(tabla, pFile);
-    tdt_destruir(&tabla);
+    // tdt_imprimirTraducciones(tabla, pFile);
+    // tdt_agregarBloques(tabla,(bloque**)&b);
+    // tdt_agregarBloques(tabla,(bloque**)&b);
+    // tdt_agregarBloques(tabla,(bloque**)&b);
+    // tdt_imprimirTraducciones(tabla, pFile);
+    // tdt_borrar(tabla,clave1);
+    // tdt_borrar(tabla,clave2);
+    // tdt_borrar(tabla,clave2);
+    // tdt_borrar(tabla,clave3);
+    // tdt_borrar(tabla,clave7);
+    // tdt_borrarBloques(tabla,(bloque**)&b);
+    // tdt_imprimirTraducciones(tabla, pFile);
+    // fprintf( pFile, "%i\n", tdt_cantidad(tabla) );
+    // tdt_recrear(&tabla,"saaaaaaaaaaaaaaaaaa");
+    // tdt_agregarBloques(tabla,(bloque**)&b);
+    // tdt_imprimirTraducciones(tabla, pFile);
+    //tdt_destruir(&tabla);
     
     fclose( pFile );
 }

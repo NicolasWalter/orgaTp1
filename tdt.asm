@@ -314,9 +314,9 @@ je .libera
 cmp qword r14, 256
 je .libera
 
-mov r13, [r12+r14*8] ; recorro toda la primer tabla
+mov r13, [r12+r14*8] ; tabla->primera->entradas[i]
 inc r14
-cmp r13, NULL
+cmp qword r13, NULL
 je .ciclo
 
 .ciclo2: 
@@ -325,12 +325,12 @@ je .libera2
 
 mov r11, [r13+r15*8] ; recorro la segunda
 inc r15
-cmp r11, NULL
+cmp qword r11, NULL
 je .ciclo2
 
 mov rdi, r11
 call free ; borro la tabla 3
-je .ciclo2
+jmp .ciclo2
 
 .libera2:
 mov rdi, r13
@@ -351,6 +351,8 @@ mov rdi, [rbx+TDT_OFFSET_IDENTIFICACION]
 call free
 mov rdi, rbx
 call free
+
+
 
 ; mov rdi, [rbx+TDT_OFFSET_IDENTIFICACION]
 ; mov rdi, [rdi]
