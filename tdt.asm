@@ -143,10 +143,11 @@ mov rbp, rsp
 push r12
 push r13
 push r14
-sub rsp,8
+push r15
 
 
 mov r13, rsi ; estoy en el primer bloque 
+mov r15, rdi
 xor r14, r14
 .ciclo:
 cmp qword [r13+r14*8], NULL
@@ -154,10 +155,11 @@ je .fin_agregarBloques
 mov r12, [r13+r14*8] ; 
 inc r14  
 mov rsi, r12
+mov rdi, r15
 call tdt_agregarBloque
 jmp .ciclo
 .fin_agregarBloques:
-add rsp,8
+pop r15
 pop r14
 pop r13
 pop r12
@@ -176,10 +178,11 @@ mov rbp, rsp
 push r12
 push r13
 push r14
-sub rsp,8
+push r15
 
 
 mov r13, rsi ; estoy en el primer bloque 
+mov r15, rdi
 xor r14, r14
 .ciclo:
 cmp qword [r13+r14*8], NULL
@@ -187,10 +190,11 @@ je .fin_borrarBloques
 mov r12, [r13+r14*8] ; 
 inc r14 
 mov rsi, r12
+mov rdi, r15
 call tdt_borrarBloque
 jmp .ciclo
 .fin_borrarBloques:
-add rsp,8
+pop r15
 pop r14
 pop r13
 pop r12
@@ -265,10 +269,10 @@ mov rbp, rsp
 push r12
 push r13
 push r14
-sub rsp,8
-
+push r15
 
 mov r13, rsi ; estoy en el primer bloque 
+mov r15, rdi
 xor r14, r14
 .ciclo:
 cmp qword [r13+r14*8], NULL
@@ -276,10 +280,11 @@ je .fin_traducirBloques
 mov r12, [r13+r14*8] ; 
 inc r14  
 mov rsi, r12
+mov rdi, r15
 call tdt_traducirBloque
 jmp .ciclo
 .fin_traducirBloques:
-add rsp,8
+pop r15
 pop r14
 pop r13
 pop r12

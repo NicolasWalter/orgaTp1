@@ -111,9 +111,7 @@ if(tabla->primera==0){ //TODO VACIO
 
 
 void tdt_borrar(tdt* tabla, uint8_t* clave) {
-	printf("%s,%i,%i,%i,%i\n","entre loro clave ", clave[0],clave[1], clave[2], tabla->primera->entradas[clave[0]]==0);
-
-if(!(tabla->primera==0 || tabla->primera->entradas[clave[0]]==0 || tabla->primera->entradas[clave[0]]->entradas[clave[1]]==0)){
+if((tabla->primera!=0 && tabla->primera->entradas[clave[0]]!=0 && tabla->primera->entradas[clave[0]]->entradas[clave[1]]!=0)){
 tabla->cantidad--;
 	int todosnull = 1;
 	int i=0;
@@ -142,7 +140,7 @@ tdtN1* tabla1= tabla->primera;
 			i++;
 			}
 			
-		if(todosnull){ 
+		if(todosnull){ // la tabla2 solo tenia un valor valido
 			free(tabla->primera->entradas[clave[0]]);
 			tabla->primera->entradas[clave[0]]=0;
 			i=0;
@@ -153,19 +151,15 @@ tdtN1* tabla1= tabla->primera;
 				i++;
 				}
 				
-				if(todosnull){ 
+				if(todosnull){ //la tabla 1 solo tenia un valor valido
 					free(tabla->primera);
 					tabla->primera=0;
-				}else{
-					//tabla->primera=0;
 				}
-		}else{
-			//tabla->primera->entradas[clave[0]]=0;
 		}
 	}else{
 		tabla3->entradas[clave[2]].valido=0;
-		tabla3=0;
-		tabla2=0;
+		// tabla3=0;
+		// tabla2=0;
 	}
 
 }
@@ -185,12 +179,12 @@ for(int i=0; i<256; i++){
 				uint8_t val[15];
 				uint8_t clave[3]={i,j,k};
 				tdt_traducir(tabla,clave,val);
-				fprintf(pFile, "%X%X%X%s",i,j,k," => ");
+				fprintf(pFile, "%02X%02X%02X%s",i,j,k," => ");
 				for(int l=0; l<15;++l){
 					if(l!=14){
-				fprintf(pFile,"%X",val[l]);
+				fprintf(pFile,"%02X",val[l]);
 					}else{
-						fprintf(pFile,"%X\n",val[l]);
+						fprintf(pFile,"%02X\n",val[l]);
 					}
 
 
@@ -202,7 +196,7 @@ for(int i=0; i<256; i++){
 }
 
 
-fclose(pFile);
+//fclose(pFile);
 
 }
 
