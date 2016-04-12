@@ -1,3 +1,6 @@
-Some text: Write this to the file
-Integer: 1, float: 3.141593
-A character: A
+max_clave = 0-0-0
+min_clave = 255-255-255
+max_valor = 0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+min_valor = 255-255-255-255-255-255-255-255-255-255-255-255-255-255-255
+- pepe -
+0

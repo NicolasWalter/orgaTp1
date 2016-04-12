@@ -5,10 +5,7 @@
 #define VAL_  TAB_3->entradas
 
 int definido(tdt* tabla, int cero, int uno, int dos){
-	// tdtN1* pri= tabla->primera;
-	// tdtN2* sec= pri->entradas[cero];
-	// tdtN3* ter = sec->entradas[uno];
-	// uint8_t va= ter->entradas[dos].valido;
+
 	 uint8_t cero8= 0;
 
 	if(tabla->primera==0 || tabla->primera->entradas[cero]==0 || tabla->primera->entradas[cero]->entradas[uno]==0 || 
@@ -75,7 +72,7 @@ tdtN3* ter= seg->entradas[clave[1]];
 
 ter->entradas[clave[2]].valido=1;
  for(int i=0;i<15;i++){
-	 //valorcito->val[i]=valor[i];
+
  	ter->entradas[clave[2]].valor.val[i]=valor[i];
 	}
 tabla->cantidad++;
@@ -111,8 +108,8 @@ if(tabla->primera==0){ //TODO VACIO
 
 
 void tdt_borrar(tdt* tabla, uint8_t* clave) {
-if((tabla->primera!=0 && tabla->primera->entradas[clave[0]]!=0 && tabla->primera->entradas[clave[0]]->entradas[clave[1]]!=0)){
-tabla->cantidad--;
+if(definido(tabla,clave[0],clave[1],clave[2])){
+	tabla->cantidad--;
 	int todosnull = 1;
 	int i=0;
 	while(i<256 && todosnull){
@@ -122,7 +119,6 @@ tabla->cantidad--;
 			i++;
 
 	}
-	printf("NULL ES %i\n", todosnull);
 
 
 tdtN3* tabla3 =tabla->primera->entradas[clave[0]]->entradas[clave[1]];
@@ -158,16 +154,13 @@ tdtN1* tabla1= tabla->primera;
 		}
 	}else{
 		tabla3->entradas[clave[2]].valido=0;
-		// tabla3=0;
-		// tabla2=0;
+
 	}
 
 }
 }
 void tdt_imprimirTraducciones(tdt* tabla, FILE *pFile) {
 
-
-//pFile= fopen("porfavor.txt", "w");
 
 char *id= tabla->identificacion;
 fprintf(pFile, "- %s %s\n",id,"-");
@@ -195,8 +188,6 @@ for(int i=0; i<256; i++){
 	
 }
 
-
-//fclose(pFile);
 
 }
 

@@ -4,8 +4,6 @@
 #include <string.h>
 
 /** Tipos lista y nodo **/
-//fopen, fread, fwrite, fclose,
-//fseek, ftell, fprintf, etc.
 
 typedef struct valor_t {
   uint8_t val[15];
